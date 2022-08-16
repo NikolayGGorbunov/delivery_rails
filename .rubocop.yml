@@ -1,0 +1,15 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+Style/Documentation:
+  Enabled: false
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'app/controllers/User/*'
+    - 'app/admin/*'
+    - 'config/initializers/*'
+RSpec/MultipleExpectations:
+  Enabled: false
