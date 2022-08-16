@@ -1,0 +1,17 @@
+<h2><%= link_to "New package", new_package_path %></h2>
+<h3><%= link_to "See packages list", packages_path %></h3>
+<div class="pack">
+  Name: <%= "#{package[:first_name]} #{package[:second_name]} #{package[:third_name]}" %>
+  <br>
+  Email: <%= "#{package[:email]}" %>
+  <br>
+  Phone number: <%= "#{package[:phone]}" %>
+  <br>
+  Size of package: <%= "#{package[:width]}x#{package[:length]}x#{package[:height]}cm" %>
+  <br>
+  Weight: <%= "#{package[:weight]}kg" %>
+  <br>
+  Route: <%= "#{package[:start_point]} – #{package[:end_point]} " %>
+  <br>
+  Price and distance: <%= "#{package[:distance]}km | #{package[:price]} RUB" %>
+</div>

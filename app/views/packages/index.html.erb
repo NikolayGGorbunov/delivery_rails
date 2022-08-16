@@ -1,0 +1,5 @@
+<h2><%= link_to "New package", new_package_path %></h2>
+<% @packages.each do |pack| %>
+  <%= link_to "Package №#{pack[:id]} info", pack %>
+  <br><br>
+<% end %>
