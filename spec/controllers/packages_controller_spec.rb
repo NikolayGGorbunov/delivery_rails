@@ -9,9 +9,11 @@ RSpec.describe PackagesController, type: :controller do
     end
   end
 
-
   describe '#index' do
-    subject(:pack_index) { get :index }
+    subject(:sort) { get :index, params: sort_params }
+
+    let(:pack_index) { get :index }
+
     let(:user0) { create :user }
     let(:user1) { create :user, email: 'user1@user1.com' }
 
@@ -22,7 +24,7 @@ RSpec.describe PackagesController, type: :controller do
       create :package, user: user1
     end
 
-    context 'with packages in BD' do
+    context 'with packages in DB' do
       it 'returns http succes' do
         pack_index
         expect(response).to have_http_status(:success)
@@ -37,24 +39,22 @@ RSpec.describe PackagesController, type: :controller do
         pack_index
         expect(assigns(:packages).size).to eq(2)
       end
-
     end
 
     context 'when user sign out' do
+      subject { get :index }
+
       before do
         sign_out user0
       end
-      subject { get :index }
+
       include_examples 'when log out'
     end
-
-
-    subject(:sort) { get :index, params: sort_params  }
 
     context 'when packages first pack > second by distance' do
       let(:sort_params) { { direction: 'asc', sort: 'distance' } }
 
-      it "sort correctly" do
+      it 'sort correctly' do
         sort
         expect(assigns(:packages)).to eq([user0.packages.last, user0.packages.first])
       end
@@ -63,51 +63,16 @@ RSpec.describe PackagesController, type: :controller do
     context 'when packages first pack > second by distance (reverse)' do
       let(:sort_params) { { direction: 'desc', sort: 'distance' } }
 
-      it "sort correctly" do
+      it 'sort correctly' do
         sort
         expect(assigns(:packages)).to eq([user0.packages.first, user0.packages.last])
-      end
-    end
-
-    context 'when packages first pack > second by price' do
-      let(:sort_params) { { direction: 'asc', sort: 'price' } }
-
-      it "sort correctly" do
-        sort
-        expect(assigns(:packages)).to eq([user0.packages.last, user0.packages.first])
-      end
-    end
-
-    context 'when packages first pack > second by price (reverse)' do
-      let(:sort_params) { { direction: 'desc', sort: 'price' } }
-
-      it "sort correctly" do
-        sort
-        expect(assigns(:packages)).to eq([user0.packages.first, user0.packages.last])
-      end
-    end
-
-    context 'when packages first pack > second by date' do
-      let(:sort_params) { { direction: 'asc', sort: 'updated_at' } }
-
-      it "sort correctly" do
-        sort
-        expect(assigns(:packages)).to eq([user0.packages.first, user0.packages.last])
-      end
-    end
-
-    context 'when packages first pack > second by price (reverse)' do
-      let(:sort_params) { { direction: 'desc', sort: 'updated_at' } }
-
-      it "sort correctly" do
-        sort
-        expect(assigns(:packages)).to eq([user0.packages.last, user0.packages.first])
       end
     end
   end
 
   describe '#show' do
     subject(:pack_show) { get :show, params: { id: Package.last.id } }
+
     let(:user0) { create :user }
 
     before do
@@ -116,10 +81,12 @@ RSpec.describe PackagesController, type: :controller do
     end
 
     context 'when user sign out' do
+      subject(:pack_show) { get :show, params: { id: Package.last.id } }
+
       before do
         sign_out user0
       end
-      subject(:pack_show) { get :show, params: { id: Package.last.id } }
+
       include_examples 'when log out'
     end
 
@@ -138,6 +105,7 @@ RSpec.describe PackagesController, type: :controller do
 
   describe '#create' do
     subject(:pack_create) { process :create, method: :post, params: { package: params } }
+
     let(:user0) { create :user }
     let(:params) { attributes_for :package }
 
@@ -146,11 +114,17 @@ RSpec.describe PackagesController, type: :controller do
     end
 
     context 'when user sign out' do
+      subject(:pack_create) { process :create, method: :post, params: { package: params } }
+
       before do
         sign_out user0
       end
-      subject(:pack_create) { process :create, method: :post, params: { package: params } }
+
       include_examples 'when log out'
+
+      it "don't create package in DB" do
+        expect { pack_create }.to change(Package, :count).by(0)
+      end
     end
 
     it 'create package' do
