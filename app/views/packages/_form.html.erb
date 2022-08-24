@@ -1,0 +1,61 @@
+<%= form_with model: @package do |form| %>
+  <div>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :second_name %><br>
+    <%= form.text_field :second_name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :third_name %><br>
+    <%= form.text_field :third_name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :email %><br>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :phone %><br>
+    <%= form.text_field :phone, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :weight %><br>
+    <%= form.number_field :weight, step: :any, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :length %><br>
+    <%= form.number_field :length, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :width %><br>
+    <%= form.number_field :width, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :height %><br>
+    <%= form.number_field :height, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :start_point %><br>
+    <%= form.text_field :start_point, required: true %>
+  </div>
+
+
+  <div>
+    <%= form.label :end_point %><br>
+    <%= form.text_field :end_point, required: true %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
