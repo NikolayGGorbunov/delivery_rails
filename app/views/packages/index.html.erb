@@ -1,5 +1,13 @@
-<h2><%= link_to "New package", new_package_path %></h2>
-<% @packages.each do |pack| %>
-  <%= link_to "Package №#{pack[:id]} info", pack %>
-  <br><br>
-<% end %>
+<div class="container">
+  <h2>
+      <%= sortable "price", "Price" %>
+      <%= sortable "distance", "Distance" %>
+      <%= sortable "updated_at", "Date" %>
+      <br><br>
+  <% @packages.each do |pack| %>
+    <%= link_to "Package №#{pack[:id]} info", pack %>
+    <br>
+  <% end %>
+  </h2>
+  <%= paginate @packages %>
+</div>

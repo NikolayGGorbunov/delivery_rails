@@ -1,30 +1,5 @@
 <%= form_with model: @package do |form| %>
   <div>
-    <%= form.label :first_name %><br>
-    <%= form.text_field :first_name, required: true %>
-  </div>
-
-  <div>
-    <%= form.label :second_name %><br>
-    <%= form.text_field :second_name, required: true %>
-  </div>
-
-  <div>
-    <%= form.label :third_name %><br>
-    <%= form.text_field :third_name, required: true %>
-  </div>
-
-  <div>
-    <%= form.label :email %><br>
-    <%= form.email_field :email, required: true %>
-  </div>
-
-  <div>
-    <%= form.label :phone %><br>
-    <%= form.text_field :phone, required: true %>
-  </div>
-
-  <div>
     <%= form.label :weight %><br>
     <%= form.number_field :weight, step: :any, required: true %>
   </div>

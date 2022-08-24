@@ -31,4 +31,5 @@
 /config/master.key
 
 /.env
-/coverage/
+/coverage/*
+/config/initializers/*

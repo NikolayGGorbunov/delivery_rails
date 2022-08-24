@@ -16,4 +16,13 @@ FactoryBot.define do
     distance { 1351 }
     price { 1351 }
   end
+
+  factory :user do
+    first_name { 'Petr' }
+    second_name { 'Petrov' }
+    third_name { 'Petrovich' }
+    email { 'petr@mail.com' }
+    phone { '1111' }
+    password { '12345678' }
+  end
 end

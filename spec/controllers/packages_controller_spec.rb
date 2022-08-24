@@ -3,23 +3,36 @@
 require 'rails_helper'
 
 RSpec.describe PackagesController, type: :controller do
-  describe '#index' do
-    subject(:pack_index) { get :index }
+  shared_examples 'when log out' do
+    it 'redirect to sign in' do
+      expect(subject).to redirect_to(new_user_session_path)
+    end
+  end
 
-    before :context do
-      create :package
-      create :package
+  describe '#index' do
+    subject(:sort) { get :index, params: sort_params }
+
+    let(:pack_index) { get :index }
+
+    let(:user0) { create :user }
+    let(:user1) { create :user, email: 'user1@user1.com' }
+
+    before do
+      sign_in user0
+      create :package, user: user0, distance: 200, price: 200
+      create :package, user: user0, distance: 100, price: 100
+      create :package, user: user1
     end
 
-    context 'has packages in BD' do
+    context 'with packages in DB' do
       it 'returns http succes' do
         pack_index
         expect(response).to have_http_status(:success)
       end
 
-      it 'assign all packages' do
+      it 'assign all user packages' do
         pack_index
-        expect(assigns(:packages)).to eq(Package.all)
+        expect(assigns(:packages)).to eq(user0.packages.all)
       end
 
       it 'assign exactly 2 packages' do
@@ -27,16 +40,57 @@ RSpec.describe PackagesController, type: :controller do
         expect(assigns(:packages).size).to eq(2)
       end
     end
+
+    context 'when user sign out' do
+      subject { get :index }
+
+      before do
+        sign_out user0
+      end
+
+      include_examples 'when log out'
+    end
+
+    context 'when packages first pack > second by distance' do
+      let(:sort_params) { { direction: 'asc', sort: 'distance' } }
+
+      it 'sort correctly' do
+        sort
+        expect(assigns(:packages)).to eq([user0.packages.last, user0.packages.first])
+      end
+    end
+
+    context 'when packages first pack > second by distance (reverse)' do
+      let(:sort_params) { { direction: 'desc', sort: 'distance' } }
+
+      it 'sort correctly' do
+        sort
+        expect(assigns(:packages)).to eq([user0.packages.first, user0.packages.last])
+      end
+    end
   end
 
   describe '#show' do
     subject(:pack_show) { get :show, params: { id: Package.last.id } }
 
-    before(:context) do
-      create :package
+    let(:user0) { create :user }
+
+    before do
+      sign_in user0
+      create :package, user: user0
     end
 
-    context 'has valid package-id' do
+    context 'when user sign out' do
+      subject(:pack_show) { get :show, params: { id: Package.last.id } }
+
+      before do
+        sign_out user0
+      end
+
+      include_examples 'when log out'
+    end
+
+    context 'with valid package-id' do
       it 'returns http succes' do
         pack_show
         expect(response).to have_http_status(:success)
@@ -52,7 +106,26 @@ RSpec.describe PackagesController, type: :controller do
   describe '#create' do
     subject(:pack_create) { process :create, method: :post, params: { package: params } }
 
+    let(:user0) { create :user }
     let(:params) { attributes_for :package }
+
+    before do
+      sign_in user0
+    end
+
+    context 'when user sign out' do
+      subject(:pack_create) { process :create, method: :post, params: { package: params } }
+
+      before do
+        sign_out user0
+      end
+
+      include_examples 'when log out'
+
+      it "don't create package in DB" do
+        expect { pack_create }.to change(Package, :count).by(0)
+      end
+    end
 
     it 'create package' do
       VCR.use_cassette 'controller create package' do
