@@ -51,7 +51,7 @@ RSpec.describe PackagesController, type: :controller do
       include_examples 'when log out'
     end
 
-    context 'when packages first pack > second by distance' do
+    context 'when first package > second by distance' do
       let(:sort_params) { { direction: 'asc', sort: 'distance' } }
 
       it 'sort correctly' do
@@ -60,7 +60,7 @@ RSpec.describe PackagesController, type: :controller do
       end
     end
 
-    context 'when packages first pack > second by distance (reverse)' do
+    context 'when first package > second by distance (reverse)' do
       let(:sort_params) { { direction: 'desc', sort: 'distance' } }
 
       it 'sort correctly' do

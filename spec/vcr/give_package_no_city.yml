@@ -27,7 +27,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Fri, 19 Aug 2022 08:26:31 GMT
+      - Mon, 29 Aug 2022 11:44:15 GMT
       X-Powered-By:
       - Express
       Access-Control-Allow-Origin:
@@ -41,26 +41,24 @@ http_interactions:
       X-Rate-Limit-Interval:
       - '60'
       X-Rate-Limit-Reset:
-      - '1660897651'
+      - '1661773515'
       Last-Modified:
-      - Thu, 18 Aug 2022 13:39:53 GMT
+      - Thu, 25 Aug 2022 14:29:52 GMT
       Etag:
-      - '"cab40b398da26b62ef90048815ca9c9a"'
+      - '"3cecdd0d51cca7d99cdb1b98afb8aa7d"'
       Vary:
       - Accept-Encoding
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
       Via:
-      - 1.1 46f331563d4a8baa77a470097fa3a10c.cloudfront.net (CloudFront)
+      - 1.1 b917bd54ec6565658d9d65cbf075f676.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - HEL51-P2
+      - HEL50-C2
       X-Amz-Cf-Id:
-      - SF77hkSDf4OE1WAU82V-_7xZI3AayX027BPe7irCHbsoROts_-9Blw==
-      Age:
-      - '362799'
+      - ppPK_qHtSRteZQL7v9U9_AkLqu6HMaxUQrkufwUTAmAVaoH4y7ru7Q==
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         eyJ0eXBlIjoiRmVhdHVyZUNvbGxlY3Rpb24iLCJxdWVyeSI6WyJoc2ZhZmpzZmEiLCJzaGRianZmc2FqIl0sImZlYXR1cmVzIjpbXSwiYXR0cmlidXRpb24iOiJOT1RJQ0U6IMKpIDIwMjIgTWFwYm94IGFuZCBpdHMgc3VwcGxpZXJzLiBBbGwgcmlnaHRzIHJlc2VydmVkLiBVc2Ugb2YgdGhpcyBkYXRhIGlzIHN1YmplY3QgdG8gdGhlIE1hcGJveCBUZXJtcyBvZiBTZXJ2aWNlIChodHRwczovL3d3dy5tYXBib3guY29tL2Fib3V0L21hcHMvKS4gVGhpcyByZXNwb25zZSBhbmQgdGhlIGluZm9ybWF0aW9uIGl0IGNvbnRhaW5zIG1heSBub3QgYmUgcmV0YWluZWQuIFBPSShzKSBwcm92aWRlZCBieSBGb3Vyc3F1YXJlLiJ9
-  recorded_at: Tue, 23 Aug 2022 13:13:11 GMT
+  recorded_at: Mon, 29 Aug 2022 11:44:15 GMT
 recorded_with: VCR 6.1.0

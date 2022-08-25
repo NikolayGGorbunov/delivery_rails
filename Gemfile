@@ -31,6 +31,7 @@ gem 'jbuilder'
 
 gem 'aasm'
 gem 'activeadmin', github: 'activeadmin/activeadmin', branch: 'master'
+gem 'active_interaction', '~> 5.1'
 gem 'after_commit_everywhere', '~> 1.0'
 gem 'devise'
 gem 'dotenv-rails', groups: %i[development test]

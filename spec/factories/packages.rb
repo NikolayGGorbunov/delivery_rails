@@ -15,6 +15,7 @@ FactoryBot.define do
     end_point { 'Krasnodar' }
     distance { 1351 }
     price { 1351 }
+    aasm_state { 'accepted' }
 
     trait :accepted do
       aasm_state { 'accepted' }
