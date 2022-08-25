@@ -4,6 +4,7 @@ require 'database_cleaner/active_record'
 require 'vcr'
 require 'simplecov'
 require 'factory_bot_rails'
+require 'aasm/rspec'
 
 SimpleCov.start do
   add_filter ['/vendor/', '/tmp/', '/lib/', '/app/views/', '/app/config/', '/app/bin/', '/test/']
@@ -118,8 +119,6 @@ RSpec.configure do |config|
   config.after do
     DatabaseCleaner.clean
   end
-
-  config.include FactoryBot::Syntax::Methods
 
   Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 end
