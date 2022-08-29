@@ -16,6 +16,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.3.0)
+      concurrent-ruby (~> 1.0)
     actioncable (7.0.3.1)
       actionpack (= 7.0.3.1)
       activesupport (= 7.0.3.1)
@@ -83,6 +85,9 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    after_commit_everywhere (1.2.2)
+      activerecord (>= 4.2)
+      activesupport
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -369,7 +374,9 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  aasm
   activeadmin!
+  after_commit_everywhere (~> 1.0)
   bootsnap
   capybara
   database_cleaner-active_record

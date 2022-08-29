@@ -29,7 +29,9 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+gem 'aasm'
 gem 'activeadmin', github: 'activeadmin/activeadmin', branch: 'master'
+gem 'after_commit_everywhere', '~> 1.0'
 gem 'devise'
 gem 'dotenv-rails', groups: %i[development test]
 gem 'kaminari'
