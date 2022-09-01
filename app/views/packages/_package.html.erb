@@ -12,4 +12,6 @@
   Route: <%= "#{package[:start_point]} – #{package[:end_point]} " %>
   <br>
   Price and distance: <%= "#{package[:distance]}km | #{package[:price]} RUB" %>
+  <br>
+  Status: <%= package[:aasm_state].capitalize %>
 </div>

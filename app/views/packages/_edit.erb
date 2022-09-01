@@ -1,0 +1,41 @@
+<%= form_with url: package_path, method: :put, model: @package do |form| %>
+  <div>
+    <%= form.label :weight %><br>
+    <%= form.number_field :weight, step: :any, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :length %><br>
+    <%= form.number_field :length, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :width %><br>
+    <%= form.number_field :width, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :height %><br>
+    <%= form.number_field :height, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :start_point %><br>
+    <%= form.text_field :start_point, required: true %>
+  </div>
+
+
+  <div>
+    <%= form.label :end_point %><br>
+    <%= form.text_field :end_point, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :aasm_state %>
+    <%= form.select :aasm_state, ['returned','accepted','delivery','delivered'] %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

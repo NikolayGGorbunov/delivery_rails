@@ -18,14 +18,7 @@ class Package < ApplicationRecord
 
   include AASM
 
-  enum aasm_state: {
-    accepted: 1,
-    returned: 0,
-    delivery: 2,
-    delivered: 3
-  }
-
-  aasm column: :aasm_state, enum: true do
+  aasm column: :aasm_state do
     state :accepted, initial: true
     state :returned
     state :delivery
