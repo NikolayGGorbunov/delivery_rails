@@ -7,7 +7,7 @@ require 'factory_bot_rails'
 require 'aasm/rspec'
 
 SimpleCov.start do
-  add_filter ['/vendor/', '/tmp/', '/lib/', '/app/views/', '/app/config/', '/app/bin/', '/test/']
+  add_filter ['/vendor/', '/tmp/', '/lib/', '/app/views/', '/app/config/', '/app/bin/', '/test/', '/app/admin/']
 end
 
 VCR.configure do |c|

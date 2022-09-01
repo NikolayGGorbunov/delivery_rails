@@ -2,6 +2,7 @@
 
 module Packages
   class Update < ActiveInteraction::Base
+    object :user, class: User, default: nil
     object :package
     integer :width, :length, :height
     float   :weight
@@ -24,6 +25,14 @@ module Packages
       package.end_point = end_point if end_point.present?
       package.distance, package.price = calculate_price.values
       change_state
+
+      if inputs.given?(:user)
+        package.first_name = user.first_name
+        package.second_name = user.second_name
+        package.third_name = user.third_name
+        package.email = user.email
+        package.phone = user.phone
+      end
 
       errors.merge!(package.errors) unless package.save
 
