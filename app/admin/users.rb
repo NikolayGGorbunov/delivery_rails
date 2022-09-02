@@ -5,9 +5,26 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :encrypted_password, :first_name, :second_name, :third_name, :phone, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  permit_params :email, :encrypted_password, :first_name,
+                :second_name, :third_name, :phone,
+                :reset_password_token, :reset_password_sent_at,
+                :remember_created_at, :organization_id, :role
 
   actions :index, :show, :edit, :new, :update, :create, :destroy
+
+  form do |f|
+    inputs 'Parameters' do
+      input :first_name
+      input :second_name
+      input :third_name
+      input :phone
+      input :email
+      input :organization_id
+      input :role, as: :select, collection: ['operator', 'orgadmin'], include_blank: false
+    end
+
+    actions
+  end
 
   controller do
 

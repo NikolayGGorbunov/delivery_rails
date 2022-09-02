@@ -16,8 +16,6 @@ class Package < ApplicationRecord
             :price, :distance,
             absence: false
 
-  include AASM
-
   aasm column: :aasm_state do
     state :accepted, initial: true
     state :returned
