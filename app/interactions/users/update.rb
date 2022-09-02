@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Users
   class Update < ActiveInteraction::Base
     object :user, class: User
@@ -15,8 +17,5 @@ module Users
 
       user
     end
-
-    private
-
   end
 end

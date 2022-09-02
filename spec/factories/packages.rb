@@ -2,11 +2,11 @@
 
 FactoryBot.define do
   factory :package do
-    first_name { 'Petr' }
-    second_name { 'Petrov' }
-    third_name { 'Petrovich' }
-    email { 'petr@mail.com' }
-    phone { '1111' }
+    first_name { Faker::Name.first_name }
+    second_name { Faker::Name.middle_name }
+    third_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    phone { Faker::PhoneNumber.cell_phone_in_e164 }
     weight { 1.0 }
     length { 1 }
     width { 1 }

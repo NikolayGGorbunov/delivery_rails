@@ -13,4 +13,14 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  ROLES = [OPERATOR = 'operator', ORGADMIN = 'orgadmin'].freeze
+
+  def operator?
+    role == OPERATOR
+  end
+
+  def admin?
+    role == ORGADMIN
+  end
 end

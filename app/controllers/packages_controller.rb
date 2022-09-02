@@ -6,15 +6,21 @@ class PackagesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    output = Packages::Index.run(params.merge(user: current_user))
-    @packages = output.result
+    authorize Package
+    @packages = if params[:sort]
+                  policy_scope(Package).order("#{sort_column} #{sort_direction}").page(params[:page])
+                else
+                  policy_scope(Package).page(params[:page])
+                end
   end
 
   def show
     @package = Package.find(params[:id])
+    authorize @package
   end
 
   def create
+    authorize Package
     output = Packages::Create.run(params.fetch(:package).merge(user: current_user))
 
     if output.valid?
@@ -26,11 +32,13 @@ class PackagesController < ApplicationController
   end
 
   def edit
+    authorize Package
     package = current_user.packages.find(params[:id])
     @package = Packages::Update.new(package.attributes)
   end
 
   def update
+    authorize Package
     package = current_user.packages.find(params[:id])
     output = Packages::Update.run(**params.permit![:packages_update], package: package)
 
@@ -47,7 +55,18 @@ class PackagesController < ApplicationController
   end
 
   def destroy
+    authorize Package
     Packages::Destroy.run!(package: current_user.packages.find(params[:id]))
     redirect_to root_path
+  end
+
+  private
+
+  def sort_column
+    Package.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : 'asc'
   end
 end

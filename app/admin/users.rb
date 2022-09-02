@@ -19,7 +19,7 @@ ActiveAdmin.register User do
       input :third_name
       input :phone
       input :email
-      input :organization_id
+      input :organization, as: :select, collection: Organization.all
       input :role, as: :select, collection: ['operator', 'orgadmin'], include_blank: false
     end
 
