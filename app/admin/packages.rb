@@ -18,8 +18,7 @@ ActiveAdmin.register Package do
       input :start_point
       input :end_point
       if action_name.in?(%w[edit update])
-        label :aasm_state
-        select :aasm_state, resource.aasm.states(permitted: true).map{|elem| elem.name.to_s}.push(resource.aasm_state)
+        input :aasm_state, as: :select, collection: resource.aasm.states(permitted: true).map{|elem| elem.name.to_s}.push(resource.aasm_state), include_blank: false
       end
     end
 
