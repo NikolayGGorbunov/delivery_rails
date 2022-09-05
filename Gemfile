@@ -37,6 +37,7 @@ gem 'devise'
 gem 'dotenv-rails', groups: %i[development test]
 gem 'kaminari'
 gem 'pry'
+gem 'pundit'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
@@ -85,6 +86,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
+  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false

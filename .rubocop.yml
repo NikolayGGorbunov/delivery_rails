@@ -13,3 +13,5 @@ AllCops:
     - 'config/initializers/*'
 RSpec/MultipleExpectations:
   Enabled: false
+RSpec/Metrics/AbcSize:
+  Enabled: false

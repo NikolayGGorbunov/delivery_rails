@@ -5,8 +5,6 @@ class Package < ApplicationRecord
 
   belongs_to :user
 
-  paginates_per 3
-
   validates :weight, :width, :length, :height,
             comparison: { greater_than: 0 }
   validates :width, :length, :height,

@@ -10,7 +10,7 @@ ActiveAdmin.register Package do
 
   form do |f|
     inputs 'Parameters' do
-      input :user if action_name == 'new'
+      input :user, as: :select, collection: User.all if action_name == 'new'
       input :weight
       input :length
       input :width
