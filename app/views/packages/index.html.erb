@@ -3,9 +3,12 @@
       <%= sortable "price", "Price" %>
       <%= sortable "distance", "Distance" %>
       <%= sortable "updated_at", "Date" %>
+      <% if current_user.admin? %>
+        <%= sortable "user_id", "Operator" %>
+      <% end %>
       <br><br>
   <% @packages.each do |pack| %>
-    <%= link_to "Package №#{pack[:id]} info", pack %>
+    <%= link_to "Package №#{pack[:id]} info. Owner: #{pack[:user_id]}", pack %>
     <br>
   <% end %>
   </h2>

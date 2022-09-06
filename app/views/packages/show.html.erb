@@ -1,1 +1,4 @@
 <%= render @package %>
+<% if current_user.admin? %>
+    <%= link_to "Edit package", edit_package_path(@package) %>
+  <% end %>
