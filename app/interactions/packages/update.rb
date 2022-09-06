@@ -17,12 +17,12 @@ module Packages
               absence: false
 
     def execute
-      package.width = width if width.present?
-      package.length = length if length.present?
-      package.height = height if height.present?
-      package.weight = weight if weight.present?
-      package.start_point = start_point if start_point.present?
-      package.end_point = end_point if end_point.present?
+      package.width = width
+      package.length = length
+      package.height = height
+      package.weight = weight
+      package.start_point = start_point
+      package.end_point = end_point
       package.distance, package.price = calculate_price.values
       change_state
 

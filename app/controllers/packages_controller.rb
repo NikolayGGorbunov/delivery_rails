@@ -7,11 +7,7 @@ class PackagesController < ApplicationController
 
   def index
     authorize Package
-    @packages = if params[:sort]
-                  policy_scope(Package).order("#{sort_column} #{sort_direction}").page(params[:page])
-                else
-                  policy_scope(Package).page(params[:page])
-                end
+    @packages = policy_scope(Package).order("#{sort_column} #{sort_direction}").page(params[:page])
   end
 
   def show
@@ -32,14 +28,14 @@ class PackagesController < ApplicationController
   end
 
   def edit
-    authorize Package
-    package = current_user.packages.find(params[:id])
-    @package = Packages::Update.new(package.attributes)
+    package = Package.find(params[:id])
+    authorize package
+    @package = Packages::Update.new(**package.attributes, package: package, user: package.user)
   end
 
   def update
-    authorize Package
-    package = current_user.packages.find(params[:id])
+    package = Package.find(params[:id])
+    authorize package
     output = Packages::Update.run(**params.permit![:packages_update], package: package)
 
     if output.valid?
@@ -63,7 +59,7 @@ class PackagesController < ApplicationController
   private
 
   def sort_column
-    Package.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+    Package.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
   end
 
   def sort_direction

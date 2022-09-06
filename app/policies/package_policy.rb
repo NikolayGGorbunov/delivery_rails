@@ -9,7 +9,7 @@ class PackagePolicy < ApplicationPolicy
 
     def resolve
       if user.admin?
-        scope.where('user_id': user.organization.users.ids).order('created_at desc')
+        scope.where('user_id': user.organization.users.ids)
       else
         scope.where('user_id': user.id)
       end
@@ -26,7 +26,7 @@ class PackagePolicy < ApplicationPolicy
   end
 
   def show?
-    @user.organization.present? && (@user.id == @package.user_id || @user.admin?)
+    @user.organization.present? && (@user.organization == @package.user.organization) && (@user.id == @package.user_id || @user.admin?)
   end
 
   def new?
@@ -38,14 +38,14 @@ class PackagePolicy < ApplicationPolicy
   end
 
   def edit?
-    @user.organization.present?
+    @user.organization.present? && (@user.organization == @package.user.organization) && @user.admin?
   end
 
   def update?
-    @user.organization.present?
+    @user.organization.present? && (@user.organization == @package.user.organization) && @user.admin?
   end
 
   def destroy?
-    @user.organization.present?
+    false
   end
 end
