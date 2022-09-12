@@ -19,7 +19,7 @@ RSpec.describe Packages::Destroy, type: :interactor do
         expect { interaction }.to change(Package, :count).by(-1)
       end
 
-      it 'destroy package' do
+      it 'destroy user package' do
         expect { interaction }.to change(user0.packages, :count).by(-1)
       end
     end

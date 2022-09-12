@@ -31,10 +31,10 @@ RSpec.describe PackagesController, type: :controller do
   end
 
   describe '#index' do
-    subject(:pack_index) { get :index }
     subject(:sort) { get :index, params: sort_params }
-    let(:sort_params) { { direction: 'asc', sort: 'id' } }
 
+    let(:pack_index) { get :index }
+    let(:sort_params) { { direction: 'asc', sort: 'id' } }
     let(:org0) { create :organization }
     let(:org1) { create :organization }
     let(:user0) { create :user, organization: org0 }
@@ -174,12 +174,14 @@ RSpec.describe PackagesController, type: :controller do
     let(:org0) { create :organization }
     let(:org1) { create :organization }
     let(:user0) { create :user, organization: org0 }
-    let(:user1) { create :user, organization: org1}
+    let(:user1) { create :user, organization: org1 }
     let(:admin0) { create :orgadmin, organization: org0 }
     let(:admin1) { create :orgadmin, organization: org1 }
     let(:pack0) { create :package, user: user0 }
     let(:pack1) { create :package, user: user1 }
-    let(:update_params) { { id: pack0.id, packages_update: { **pack0.attributes, length: 100, aasm_state: 'returned' } } }
+    let(:update_params) do
+      { id: pack0.id, packages_update: { **pack0.attributes, length: 100, aasm_state: 'returned' } }
+    end
 
     include_examples 'when log out'
 
@@ -208,12 +210,14 @@ RSpec.describe PackagesController, type: :controller do
     end
 
     context 'when params is invalid' do
-      let(:update_params) { { id: pack0.id, packages_update: { **pack0.attributes, length: 'jhdasdh', aasm_state: 'returned' } } }
+      let(:update_params) do
+        { id: pack0.id, packages_update: { **pack0.attributes, length: 'jhdasdh', aasm_state: 'returned' } }
+      end
 
       before { sign_in admin0 }
 
       it 'not update package' do
-        expect(pack_update).to render_template("packages/edit")
+        expect(pack_update).to render_template('packages/edit')
         expect(Package.find(pack0.id).length).not_to eq(100)
         expect(Package.find(pack0.id).aasm_state).not_to eq('returned')
       end

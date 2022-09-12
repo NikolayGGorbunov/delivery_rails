@@ -33,9 +33,7 @@ ActiveAdmin.register User do
     private
 
     def update_user_packages(user)
-      user.packages.each do |package|
-        Packages::Update.run(**package.attributes, package: package, user: user)
-      end
+      UserPackagesUpdateJob.perform_async(user.id)
     end
   end
   #
