@@ -2,11 +2,7 @@
 
 require 'rails_helper'
 
-
-
 RSpec.describe UserPackagesUpdateJob do
-
-
   subject(:job) { described_class.perform_async(params) }
 
   let(:user0) { create :user }
@@ -20,7 +16,6 @@ RSpec.describe UserPackagesUpdateJob do
 
     let(:params) { user0.id }
 
-
     it "run update for all user's packages" do
       Sidekiq::Testing.inline! do
         allow(Packages::Update).to receive(:run).and_return(1)
@@ -31,7 +26,7 @@ RSpec.describe UserPackagesUpdateJob do
 
     it 'queing job into Redis' do
       job
-      expect(UserPackagesUpdateJob.jobs.size).to eq(1)
+      expect(described_class.jobs.size).to eq(1)
     end
   end
 end

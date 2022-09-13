@@ -1,0 +1,13 @@
+<div class="user">
+  Name: <%= "#{@user[:first_name]} #{@user[:second_name]} #{@user[:third_name]}" %>
+  <br>
+  Email: <%= "#{@user[:email]}" %>
+  <br>
+  Phone number: <%= "#{@user[:phone]}" %>
+  <br>
+  <% if @widgets.present? %>
+    <% @widgets.each do |widget| %>
+      <%= render partial: 'widget', locals: { widget_data: widget } %>
+    <% end %>
+  <% end %>
+</div>

@@ -27,6 +27,9 @@
         <li class="nav-item">
           <a href=<%= destroy_user_session_path %> class="btn btn-info" role="button">Logout</a>
         </li>
+        <li class="nav-item">
+          <a href=<%= user_path(current_user.id) %> class="btn btn-info" role="button">User info</a>
+        </li>
       <% else %>
         <li class="nav-item">
           <a href=<%= new_user_registration_path %> class="btn btn-info" role="button">SignUp</a>
