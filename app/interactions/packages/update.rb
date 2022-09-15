@@ -23,7 +23,9 @@ module Packages
       package.weight = weight
       package.start_point = start_point
       package.end_point = end_point
-      package.distance, package.price = calculate_price.values
+      if package_values_changed?
+        package.distance, package.price = calculate_price.values
+      end
       change_state
 
       if inputs.given?(:user)
@@ -40,6 +42,11 @@ module Packages
     end
 
     private
+
+    def package_values_changed?
+      package.width_changed? || package.length_changed? || package.height_changed? ||
+        package.weight_changed? || package.start_point_changed? || package.end_point_changed?
+    end
 
     def calculate_price
       Delivery::Deliveryboy.give_package(inputs.except(:package)).slice(:distance, :price)

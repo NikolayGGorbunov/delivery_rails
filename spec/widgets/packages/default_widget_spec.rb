@@ -9,7 +9,7 @@ RSpec.describe Packages::DefaultWidget, type: :widget do
     let(:org0) { create :organization }
     let(:user0) { create :user, organization: org0 }
 
-    before do
+    let!(:packages) do
       create :package, user: user0
       create :package, user: user0
     end

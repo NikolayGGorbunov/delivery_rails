@@ -10,7 +10,7 @@ RSpec.describe Packages::Distance, type: :widget do
     let(:user0) { create :user, organization: org0 }
     let(:user1) { create :user, organization: org0 }
 
-    before do
+    let!(:packages) do
       create :package, user: user0, distance: 200
       create :package, user: user1, distance: 100
     end

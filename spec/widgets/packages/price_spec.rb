@@ -10,7 +10,7 @@ RSpec.describe Packages::Price, type: :widget do
     let(:user0) { create :user, organization: org0 }
     let(:user1) { create :user, organization: org0 }
 
-    before do
+    let!(:packages) do
       create_list(:package, 5, user: user0, price: 100)
       create_list(:package, 2, user: user1, price: 500)
     end
