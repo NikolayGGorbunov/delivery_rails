@@ -14,6 +14,8 @@ class Package < ApplicationRecord
             :price, :distance,
             absence: false
 
+  scope :of_org_by, ->(org_id, group_by = nil) { joins(:user).where(user: { organization_id: org_id }).group(group_by) }
+
   aasm column: :aasm_state do
     state :accepted, initial: true
     state :returned
